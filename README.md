@@ -1,26 +1,24 @@
-#cpp-rails-chat-app
+# README
 
-Rails + Docker + C++ + etension によるチャットアプリ開発リポジトリです。
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## 予定機能
+Things you may want to cover:
 
-- チャットルーム作成・一覧・詳細
-- メッセージ送信・一覧表示
-- C++によるモデレーション
-- C++による全文検索
-- AIによる会話要約
-- AIによる返信候補生成
+* Ruby version
 
-## 開発環境
+* System dependencies
 
-- macOS
-- Docker / Docker Compose
-- Rails
-- PostgreSQL
-- C++ Ruby Extension
+* Configuration
 
-## 開発方針
+* Database creation
 
-- 小さな単位で実装
-- 動いたらすぐ commit
-- 区切りごとに GitHub へ push
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
