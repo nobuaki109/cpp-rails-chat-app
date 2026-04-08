@@ -1,0 +1,14 @@
+<h1><%= @room.name %></h1>
+
+<%= link_to "一覧に戻る", rooms_path %>
+
+<h2>メッセージ</h2>
+
+<ul>
+  <% @messages.each do |message| %>
+    <li>
+      <strong><%= message.author_name %></strong>
+      <%= message.content %>
+    </li>
+  <% end %>
+</ul>

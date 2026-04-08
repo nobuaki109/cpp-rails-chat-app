@@ -1,0 +1,11 @@
+<h1>チャットルーム一覧</h1>
+
+<%= link_to "ルーム作成", new_room_path %>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room.name, room_path(room) %>
+    </li>
+  <% end %>
+</ul>
