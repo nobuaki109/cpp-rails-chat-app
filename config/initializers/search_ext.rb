@@ -1,0 +1,1 @@
+require Rails.root.join("ext/search_ext/search_ext")
