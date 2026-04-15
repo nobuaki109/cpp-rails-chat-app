@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     if@message.save
       redirect_to room_path(@room),notion:"メッセージを送信しました。"
     else
-      @message = @room.message.order(create_at: :asc)
+      @messages = @room.messages.order(create_at: :asc)
       render "rooms/show", status: :unprocessable_entity
     end
   end
