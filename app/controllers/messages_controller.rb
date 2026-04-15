@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def create
-    @room = Room.find(paramas[:room_id])
+    @room = Room.find(params[:room_id])
     @message = @room.messages.build(message_params)
 
     if@message.save
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    paramas.require(:message).permit(:author_name, :content)
+    params.require(:message).permit(:author_name, :content)
   end
 end
 
