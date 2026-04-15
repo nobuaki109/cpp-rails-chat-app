@@ -1,0 +1,1 @@
+require Rails.root.join("ext/moderation_ext/moderation_ext")

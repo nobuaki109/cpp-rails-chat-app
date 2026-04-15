@@ -33,3 +33,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+
+/ext/moderation_ext/Makefile
+/ext/moderation_ext/*.o
+/ext/moderation_ext/*.so
+/ext/moderation_ext/*.bundle
