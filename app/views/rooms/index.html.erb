@@ -1,11 +1,23 @@
-<h1>チャットルーム一覧</h1>
+<div class="page-header">
+  <div>
+    <h1>チャットルーム一覧</h1>
+    <p>話したいルームを選ぶか、新しいルームを作成してください。</p>
+  </div>
 
-<%= link_to "ルーム作成", new_room_path %>
+  <%= link_to "ルーム作成", new_room_path, class: "button" %>
+</div>
 
-<ul>
-  <% @rooms.each do |room| %>
-    <li>
-      <%= link_to room.name, room_path(room) %>
-    </li>
-  <% end %>
-</ul>
+<% if @rooms.any? %>
+  <ul class="room-list">
+    <% @rooms.each do |room| %>
+      <li>
+        <%= link_to room_path(room), class: "room-list-item" do %>
+          <span><%= room.name %></span>
+          <small><%= room.messages.count %>件のメッセージ</small>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="empty-state">まだルームがありません。</p>
+<% end %>

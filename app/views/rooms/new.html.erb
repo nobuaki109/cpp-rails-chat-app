@@ -1,10 +1,28 @@
-<h1>ルーム作成</h1>
-
-<%= form_with model: @room do |f| %>
+<div class="page-header">
   <div>
+    <h1>ルーム作成</h1>
+    <p>新しい会話の場所を作ります。</p>
+  </div>
+
+  <%= link_to "一覧に戻る", rooms_path, class: "button button-secondary" %>
+</div>
+
+<% if @room.errors.any? %>
+  <div class="error-box">
+    <h2><%= @room.errors.count %>件のエラーがあります</h2>
+    <ul>
+      <% @room.errors.full_messages.each do |error_message| %>
+        <li><%= error_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @room, class: "form-panel" do |f| %>
+  <div class="field">
     <%= f.label :name, "ルーム名" %>
     <%= f.text_field :name %>
   </div>
 
-  <%= f.submit "作成" %>
+  <%= f.submit "作成", class: "button" %>
 <% end %>

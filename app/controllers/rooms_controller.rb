@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to @room, notice: "ルームを作成しました"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

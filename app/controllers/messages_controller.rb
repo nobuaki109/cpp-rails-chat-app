@@ -5,16 +5,14 @@ class MessagesController < ApplicationController
 
     if ModerationService.contains_ng_word?(@message.content)
       @message.errors.add(:content, "にNGワードが含まれています")
-      @messages = @room.messages.order(created_at: :asc)
-      render "rooms/show", status: :unprocessable_entity
+      render_room_with_errors
       return
     end
 
     if @message.save
-      redirect_to room_path(@room), notice:"メッセージを送信しました。"
+      redirect_to room_path(@room), notice: "メッセージを送信しました。"
     else
-      @messages = @room.messages.order(created_at: :asc)
-      render "rooms/show", status: :unprocessable_entity
+      render_room_with_errors
     end
   end
 
@@ -23,6 +21,10 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:author_name, :content)
   end
+
+  def render_room_with_errors
+    @query = params[:query]
+    @messages = @room.messages.order(created_at: :asc)
+    render "rooms/show", status: :unprocessable_content
+  end
 end
-
-

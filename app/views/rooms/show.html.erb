@@ -1,67 +1,72 @@
-<h1><%= @room.name %></h1>
-<p>
-  <%= link_to "一覧に戻る", rooms_path %>
-</p>
-
-<hr>
-
-<h2>メッセージ検索</h2>
-
-<%= form_with url: room_path(@room), method: :get, local: true do |f| %>
+<div class="page-header">
   <div>
-    <%= f.label :query, "キーワード" %><br>
-    <%= f.text_field :query, value: @query %>
+    <h1><%= @room.name %></h1>
+    <p><%= @room.messages.count %>件のメッセージ</p>
   </div>
 
-  <div style="margin-top: 12px;">
-    <%= f.submit "検索する" %>
-  </div>
-<% end %>
+  <%= link_to "一覧に戻る", rooms_path, class: "button button-secondary" %>
+</div>
 
-<hr>
+<section class="toolbar">
+  <%= form_with url: room_path(@room), method: :get, local: true, class: "search-form" do |f| %>
+    <div class="field">
+      <%= f.label :query, "メッセージ検索" %>
+      <%= f.text_field :query, value: @query, placeholder: "キーワードを入力" %>
+    </div>
 
-<h2>メッセージ一覧</h2>
+    <%= f.submit "検索", class: "button" %>
 
-<% if @messages.any? %>
-  <ul>
-    <% @messages.each do |message| %>
-      <li style="margin-bottom: 12px;">
-        <strong><%= message.author_name %></strong><br>
-        <%= message.content %>
-      </li>
+    <% if @query.present? %>
+      <%= link_to "解除", room_path(@room), class: "button button-secondary" %>
     <% end %>
-  </ul>
-<% else %>
-  <p>該当するメッセージはありません。</p>
-<% end %>
+  <% end %>
+</section>
 
-<hr>
-
-<h2>メッセージを送る</h2>
-
-<% if @message.errors.any? %>
-  <div>
-    <h3><%= @message.errors.count %>件のエラーがあります</h3>
-    <ul>
-      <% @message.errors.full_messages.each do |error_message| %>
-        <li><%= error_message %></li>
+<section class="chat-window">
+  <% if @messages.any? %>
+    <ul class="message-list">
+      <% @messages.each do |message| %>
+        <li class="message-item">
+          <div class="message-meta">
+            <strong><%= message.author_name %></strong>
+            <time datetime="<%= message.created_at.iso8601 %>">
+              <%= l message.created_at, format: :short %>
+            </time>
+          </div>
+          <div class="message-content"><%= simple_format(message.content) %></div>
+        </li>
       <% end %>
     </ul>
-  </div>
-<% end %>
+  <% else %>
+    <p class="empty-state">該当するメッセージはありません。</p>
+  <% end %>
+</section>
 
-<%= form_with model: [@room, @message] do |f| %>
-  <div>
-    <%= f.label :author_name, "名前" %><br>
-    <%= f.text_field :author_name %>
-  </div>
+<section class="message-form-section">
+  <h2>メッセージを送る</h2>
 
-  <div style="margin-top: 12px;">
-    <%= f.label :content, "メッセージ" %><br>
-    <%= f.text_area :content, rows: 4 %>
-  </div>
+  <% if @message.errors.any? %>
+    <div class="error-box">
+      <h3><%= @message.errors.count %>件のエラーがあります</h3>
+      <ul>
+        <% @message.errors.full_messages.each do |error_message| %>
+          <li><%= error_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div style="margin-top: 12px;">
-    <%= f.submit "送信する" %>
-  </div>
-<% end %>
+  <%= form_with model: [@room, @message], class: "form-panel" do |f| %>
+    <div class="field">
+      <%= f.label :author_name, "名前" %>
+      <%= f.text_field :author_name, placeholder: "例: Nobuaki" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :content, "メッセージ" %>
+      <%= f.text_area :content, rows: 4, placeholder: "メッセージを入力" %>
+    </div>
+
+    <%= f.submit "送信", class: "button" %>
+  <% end %>
+</section>
