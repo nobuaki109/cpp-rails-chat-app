@@ -39,3 +39,8 @@
 /ext/moderation_ext/*.o
 /ext/moderation_ext/*.so
 /ext/moderation_ext/*.bundle
+
+/ext/search_ext/Makefile
+/ext/search_ext/*.o
+/ext/search_ext/*.so
+/ext/search_ext/*.bundle
